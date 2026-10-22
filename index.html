@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Public Transport Monitoring Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f6f9; }
+        .card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .status-good { color: green; font-weight: bold; }
+        .crowd-high { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Public Transport Monitoring Dashboard</h1>
+    <div id="routes-container">
+        <div class="card" data-route="101">
+            <h3>Bus Route: 101</h3>
+            <p><strong>Route:</strong> Station A to Station B</p>
+            <p><strong>ETA:</strong> 5 mins</p>
+            <p><strong>Crowd Level:</strong> <span class="crowd-high">High</span></p>
+            <p><strong>Status:</strong> <span class="status-good">On Time</span></p>
+        </div>
+    </div>
+</body>
+</html>
