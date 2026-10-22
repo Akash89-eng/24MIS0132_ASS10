@@ -4,22 +4,70 @@
     <meta charset="UTF-8">
     <title>Public Transport Monitoring Dashboard</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f6f9; }
-        .card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .status-good { color: green; font-weight: bold; }
-        .crowd-high { color: red; font-weight: bold; }
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f6f9; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .card { background: white; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .filter-section { margin-bottom: 20px; }
+        select, input { padding: 8px; width: 100%; max-width: 300px; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.9em; font-weight: bold; }
+        .high { background: #ffebee; color: #c62828; }
+        .mod { background: #fff3e0; color: #ef6c00; }
+        .low { background: #e8f5e9; color: #2e7d32; }
+        .disruption-banner { background: #fff3e0; border-left: 5px solid #ff9800; padding: 10px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-    <h1>Public Transport Monitoring Dashboard</h1>
-    <div id="routes-container">
-        <div class="card" data-route="101">
-            <h3>Bus Route: 101</h3>
-            <p><strong>Route:</strong> Station A to Station B</p>
-            <p><strong>ETA:</strong> 5 mins</p>
-            <p><strong>Crowd Level:</strong> <span class="crowd-high">High</span></p>
-            <p><strong>Status:</strong> <span class="status-good">On Time</span></p>
+    <div class="container">
+        <h1>🚍 Public Transport Monitoring Dashboard</h1>
+        
+        <div class="disruption-banner">
+            <strong>⚠️ Service Advisories & Disruptions:</strong>
+            <ul>
+                <li>Route 202: Delayed by 15 mins due to heavy traffic.</li>
+                <li>Route 305: Temporary stop closure at 5th Avenue.</li>
+                <li>Route 101: Diverted around downtown construction.</li>
+            </ul>
+        </div>
+
+        <div class="filter-section">
+            <label for="routeFilter"><strong>Filter by Route Number:</strong></label><br><br>
+            <input type="text" id="routeFilter" placeholder="Enter route number (e.g., 101)" oninput="filterRoutes()">
+        </div>
+
+        <div id="routes">
+            <div class="card text-route" data-route="101">
+                <h2>Route 101</h2>
+                <p><strong>Journey:</strong> Downtown Hub ↔ North Terminal</p>
+                <p><strong>ETA:</strong> 8 mins</p>
+                <p><strong>Crowd Level:</strong> <span class="badge high">High</span></p>
+                <p><strong>Status:</strong> Diverted</p>
+            </div>
+            <div class="card text-route" data-route="202">
+                <h2>Route 202</h2>
+                <p><strong>Journey:</strong> West Suburbs ↔ Tech Park</p>
+                <p><strong>ETA:</strong> 15 mins</p>
+                <p><strong>Crowd Level:</strong> <span class="badge mod">Moderate</span></p>
+                <p><strong>Status:</strong> Delayed</p>
+            </div>
+            <div class="card text-route" data-route="305">
+                <h2>Route 305</h2>
+                <p><strong>Journey:</strong> Eastern Airport Express</p>
+                <p><strong>ETA:</strong> 2 mins</p>
+                <p><strong>Crowd Level:</strong> <span class="badge low">Low</span></p>
+                <p><strong>Status:</strong> Stop Closure</p>
+            </div>
         </div>
     </div>
+
+    <script>
+        function filterRoutes() {
+            let input = document.getElementById('routeFilter').value.toUpperCase();
+            let cards = document.getElementsByClassName('text-route');
+            for (let card of cards) {
+                let route = card.getAttribute('data-route');
+                card.style.display = route.includes(input) || input === "" ? "block" : "none";
+            }
+        }
+    </script>
 </body>
 </html>
